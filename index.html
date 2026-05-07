@@ -1,0 +1,957 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Half the Truth — A Web Novel</title>
+
+<!-- SEO & Open Graph -->
+<meta name="description" content="Thea sees too much. Four kids with impossible abilities. A boarding school hiding dark secrets. Half the Truth — a web novel on Royal Road.">
+<meta name="keywords" content="Half the Truth, web novel, Royal Road, Millhaven Academy, paranormal, YA fiction, The Fractured Realm">
+<meta property="og:title" content="Half the Truth — A Web Novel">
+<meta property="og:description" content="Four kids with impossible abilities. A boarding school hiding dark secrets. Everyone around them is only telling them half the truth.">
+<meta property="og:image" content="https://thefracturedrealm.net/cover-art.jpg">
+<meta property="og:url" content="https://thefracturedrealm.net">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="The Fractured Realm">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Half the Truth — A Web Novel">
+<meta name="twitter:description" content="Four kids with impossible abilities. A boarding school hiding dark secrets. Everyone around them is only telling them half the truth.">
+<meta name="twitter:image" content="https://thefracturedrealm.net/cover-art.jpg">
+
+<link rel="icon" type="image/jpeg" href="./favicon.jpg">
+<link rel="canonical" href="https://thefracturedrealm.net">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #0a0a0f;
+    --parchment: #f0ebe3;
+    --gold: #c9a84c;
+    --gold-dim: #a8883a;
+    --blood: #8b1a1a;
+    --smoke: #2a2a35;
+    --mist: #d4cfc7;
+    --ghost: rgba(201, 168, 76, 0.08);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--ink);
+    color: var(--parchment);
+    font-family: 'DM Sans', sans-serif;
+    overflow-x: hidden;
+    cursor: default;
+  }
+
+  /* ========== HERO ========== */
+  .hero {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 60% 50% at 50% 40%, rgba(139,26,26,0.12) 0%, transparent 70%),
+      radial-gradient(ellipse 80% 60% at 30% 70%, rgba(201,168,76,0.06) 0%, transparent 60%),
+      radial-gradient(ellipse 40% 80% at 80% 20%, rgba(201,168,76,0.04) 0%, transparent 50%);
+    z-index: 1;
+  }
+
+  .hero::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    right: 0;
+    height: 120px;
+    background: linear-gradient(to top, var(--ink), transparent);
+    z-index: 2;
+  }
+
+  .grain {
+    position: fixed;
+    inset: 0;
+    opacity: 0.035;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 9999;
+  }
+
+  .particles {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    overflow: hidden;
+  }
+
+  .particle {
+    position: absolute;
+    width: 2px;
+    height: 2px;
+    background: var(--gold);
+    border-radius: 50%;
+    opacity: 0;
+    animation: drift 8s infinite ease-in-out;
+  }
+
+  @keyframes drift {
+    0%, 100% { opacity: 0; transform: translateY(0) translateX(0); }
+    30% { opacity: 0.6; }
+    70% { opacity: 0.3; }
+    100% { opacity: 0; transform: translateY(-200px) translateX(40px); }
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 3;
+    padding: 2rem;
+    max-width: 1100px;
+    display: flex;
+    align-items: center;
+    gap: clamp(2rem, 5vw, 5rem);
+    text-align: left;
+  }
+
+  .cover-wrapper {
+    flex-shrink: 0;
+    position: relative;
+  }
+
+  .cover-wrapper img {
+    width: clamp(220px, 28vw, 360px);
+    height: auto;
+    display: block;
+    border: 1px solid rgba(201,168,76,0.15);
+    box-shadow:
+      0 0 60px rgba(0,0,0,0.6),
+      0 0 120px rgba(139,26,26,0.1),
+      0 20px 60px rgba(0,0,0,0.4);
+    transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94), box-shadow 0.6s;
+  }
+
+  .cover-wrapper:hover img {
+    transform: scale(1.03) translateY(-4px);
+    box-shadow:
+      0 0 80px rgba(0,0,0,0.7),
+      0 0 160px rgba(201,168,76,0.08),
+      0 30px 80px rgba(0,0,0,0.5);
+  }
+
+  .cover-glow {
+    position: absolute;
+    inset: -20px;
+    background: radial-gradient(ellipse at center, rgba(201,168,76,0.08) 0%, transparent 70%);
+    z-index: -1;
+    filter: blur(20px);
+  }
+
+  .hero-text { flex: 1; min-width: 0; }
+
+  .tagline {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.7rem;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 2rem;
+    opacity: 0;
+    animation: fadeUp 1s 0.3s forwards;
+  }
+
+  .title {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    font-size: clamp(3rem, 8vw, 7rem);
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    margin-bottom: 0.3em;
+    opacity: 0;
+    animation: fadeUp 1.2s 0.6s forwards;
+  }
+
+  .title em {
+    font-style: italic;
+    color: var(--gold);
+    position: relative;
+  }
+
+  .title em::after {
+    content: '';
+    position: absolute;
+    bottom: 0.08em;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold-dim), transparent);
+  }
+
+  .subtitle {
+    font-family: 'Libre Baskerville', serif;
+    font-style: italic;
+    font-size: clamp(0.95rem, 2vw, 1.15rem);
+    color: var(--mist);
+    max-width: 500px;
+    margin: 0 0 3rem;
+    line-height: 1.8;
+    opacity: 0;
+    animation: fadeUp 1s 0.9s forwards;
+  }
+
+  .cta-group {
+    display: flex;
+    gap: 1.2rem;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    opacity: 0;
+    animation: fadeUp 1s 1.2s forwards;
+  }
+
+  .btn {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    padding: 1rem 2.5rem;
+    border: none;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    text-decoration: none;
+    display: inline-block;
+  }
+
+  .btn-primary {
+    background: var(--gold);
+    color: var(--ink);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .btn-primary::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(120deg, transparent 30%, rgba(255,255,255,0.2) 50%, transparent 70%);
+    transform: translateX(-100%);
+    transition: transform 0.6s;
+  }
+
+  .btn-primary:hover::before { transform: translateX(100%); }
+  .btn-primary:hover { box-shadow: 0 0 30px rgba(201, 168, 76, 0.3); }
+
+  .btn-ghost {
+    background: transparent;
+    color: var(--parchment);
+    border: 1px solid rgba(240, 235, 227, 0.2);
+  }
+
+  .btn-ghost:hover {
+    border-color: var(--gold);
+    color: var(--gold);
+  }
+
+  .scroll-hint {
+    position: absolute;
+    bottom: 2.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 3;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    opacity: 0;
+    animation: fadeUp 1s 1.8s forwards;
+  }
+
+  .scroll-hint span {
+    font-size: 0.6rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--mist);
+    opacity: 0.4;
+  }
+
+  .scroll-line {
+    width: 1px;
+    height: 40px;
+    background: linear-gradient(to bottom, var(--gold), transparent);
+    animation: scrollPulse 2s infinite;
+  }
+
+  @keyframes scrollPulse {
+    0%, 100% { opacity: 0.3; transform: scaleY(0.6); }
+    50% { opacity: 0.8; transform: scaleY(1); }
+  }
+
+  /* ========== DIVIDER ========== */
+  .divider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1.5rem;
+    padding: 2rem 0;
+    opacity: 0.3;
+  }
+
+  .divider-line { width: 60px; height: 1px; background: var(--gold); }
+  .divider-diamond {
+    width: 6px; height: 6px;
+    background: var(--gold);
+    transform: rotate(45deg);
+  }
+
+  /* ========== SECTIONS ========== */
+  section {
+    padding: 6rem 2rem;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .section-label {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.65rem;
+    letter-spacing: 0.5em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 2rem;
+  }
+
+  .section-heading {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    font-size: clamp(2rem, 4vw, 3.2rem);
+    line-height: 1.2;
+    margin-bottom: 2rem;
+  }
+
+  /* ========== SYNOPSIS ========== */
+  .synopsis-text {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 1.05rem;
+    line-height: 2;
+    color: var(--mist);
+    max-width: 680px;
+  }
+
+  .synopsis-text p { margin-bottom: 1.5rem; }
+
+  .synopsis-text .highlight {
+    color: var(--gold);
+    font-style: italic;
+  }
+
+  .quote-block {
+    border-left: 2px solid var(--blood);
+    padding: 1.5rem 0 1.5rem 2rem;
+    margin: 3rem 0;
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 1.4rem;
+    line-height: 1.7;
+    color: var(--parchment);
+    opacity: 0.85;
+  }
+
+  /* ========== CHARACTERS ========== */
+  .characters-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5rem;
+    margin-top: 2rem;
+  }
+
+  .character-card {
+    background: rgba(201,168,76,0.03);
+    border: 1px solid rgba(201,168,76,0.1);
+    padding: 2rem;
+    transition: all 0.4s;
+  }
+
+  .character-card:hover {
+    border-color: rgba(201,168,76,0.25);
+    background: rgba(201,168,76,0.06);
+  }
+
+  .character-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.4rem;
+    font-weight: 400;
+    color: var(--gold);
+    margin-bottom: 0.3rem;
+  }
+
+  .character-ability {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.65rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--blood);
+    margin-bottom: 1rem;
+  }
+
+  .character-desc {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 0.85rem;
+    line-height: 1.8;
+    color: var(--mist);
+    opacity: 0.8;
+  }
+
+  /* ========== CHAPTERS ========== */
+  .chapters-grid {
+    display: grid;
+    gap: 1px;
+    background: rgba(201,168,76,0.1);
+    border: 1px solid rgba(201,168,76,0.1);
+    margin-top: 2rem;
+  }
+
+  .chapter-card {
+    background: var(--ink);
+    padding: 2rem 2.5rem;
+    display: flex;
+    align-items: baseline;
+    gap: 2rem;
+    transition: all 0.4s;
+    cursor: pointer;
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .chapter-card:hover {
+    background: rgba(201,168,76,0.04);
+    padding-left: 3rem;
+  }
+
+  .chapter-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.85rem;
+    color: var(--gold);
+    min-width: 50px;
+    letter-spacing: 0.1em;
+  }
+
+  .chapter-info h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 400;
+    font-size: 1.3rem;
+    margin-bottom: 0.4rem;
+    transition: color 0.3s;
+  }
+
+  .chapter-card:hover .chapter-info h3 { color: var(--gold); }
+
+  .chapter-info p {
+    font-size: 0.8rem;
+    color: var(--mist);
+    opacity: 0.5;
+    line-height: 1.6;
+  }
+
+  .chapter-status {
+    margin-left: auto;
+    font-size: 0.6rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    padding: 0.3rem 0.8rem;
+    border: 1px solid rgba(201,168,76,0.2);
+    color: var(--gold);
+    white-space: nowrap;
+  }
+
+  .chapters-more {
+    text-align: center;
+    margin-top: 2.5rem;
+  }
+
+  /* ========== LINKS / PLATFORMS ========== */
+  .platforms {
+    display: flex;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+    margin-top: 2rem;
+    justify-content: center;
+  }
+
+  .platform-link {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    padding: 1.2rem 2rem;
+    border: 1px solid rgba(201,168,76,0.15);
+    background: rgba(201,168,76,0.03);
+    text-decoration: none;
+    color: var(--parchment);
+    transition: all 0.4s;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.8rem;
+    letter-spacing: 0.1em;
+  }
+
+  .platform-link:hover {
+    border-color: var(--gold);
+    background: rgba(201,168,76,0.08);
+    color: var(--gold);
+  }
+
+  .platform-icon {
+    font-size: 1.2rem;
+  }
+
+  /* ========== AUTHOR ========== */
+  .author-section {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 3rem;
+    align-items: start;
+  }
+
+  .author-avatar {
+    width: 100px;
+    height: 100px;
+    border: 1px solid rgba(201,168,76,0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.5rem;
+    font-style: italic;
+    color: var(--gold);
+    background: rgba(201,168,76,0.03);
+  }
+
+  .author-bio {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 0.95rem;
+    line-height: 1.9;
+    color: var(--mist);
+  }
+
+  .author-bio strong {
+    color: var(--parchment);
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 400;
+    font-size: 1.1rem;
+  }
+
+  /* ========== SUBSCRIBE ========== */
+  .subscribe-section {
+    text-align: center;
+    padding: 8rem 2rem;
+    position: relative;
+  }
+
+  .subscribe-section::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 50% 60% at 50% 50%, rgba(201,168,76,0.04), transparent);
+  }
+
+  /* ========== FOOTER ========== */
+  footer {
+    padding: 3rem 2rem;
+    text-align: center;
+    border-top: 1px solid rgba(201,168,76,0.08);
+  }
+
+  footer p {
+    font-size: 0.7rem;
+    color: var(--mist);
+    opacity: 0.3;
+    letter-spacing: 0.1em;
+  }
+
+  /* ========== ANIMATIONS ========== */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ========== RESPONSIVE ========== */
+  @media (max-width: 640px) {
+    .hero-content { flex-direction: column; text-align: center; }
+    .hero-text { text-align: center; }
+    .cta-group { justify-content: center !important; }
+    .subtitle { margin: 0 auto 3rem !important; }
+    .author-section { grid-template-columns: 1fr; gap: 2rem; }
+    .chapter-card { flex-wrap: wrap; gap: 0.5rem 1.5rem; }
+    .chapter-status { margin-left: 0; margin-top: 0.5rem; }
+    .characters-grid { grid-template-columns: 1fr 1fr; }
+  }
+
+  @media (max-width: 400px) {
+    .characters-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<div class="grain"></div>
+
+<!-- ========== HERO ========== -->
+<header class="hero">
+  <div class="particles">
+    <div class="particle" style="left:15%; top:20%; animation-delay:0s; animation-duration:7s;"></div>
+    <div class="particle" style="left:80%; top:30%; animation-delay:1.5s; animation-duration:9s;"></div>
+    <div class="particle" style="left:40%; top:60%; animation-delay:3s; animation-duration:6s;"></div>
+    <div class="particle" style="left:65%; top:75%; animation-delay:0.8s; animation-duration:8s;"></div>
+    <div class="particle" style="left:25%; top:80%; animation-delay:2.2s; animation-duration:10s;"></div>
+    <div class="particle" style="left:90%; top:55%; animation-delay:4s; animation-duration:7.5s;"></div>
+    <div class="particle" style="left:50%; top:15%; animation-delay:1s; animation-duration:8.5s;"></div>
+    <div class="particle" style="left:10%; top:50%; animation-delay:5s; animation-duration:6.5s;"></div>
+  </div>
+
+  <div class="hero-content">
+    <div class="cover-wrapper" style="opacity:0; animation: fadeUp 1.2s 0.2s forwards;">
+      <div class="cover-glow"></div>
+      <img src="./cover-art.jpg" alt="Half the Truth — Cover Art">
+    </div>
+    <div class="hero-text">
+      <p class="tagline">A Web Novel</p>
+      <h1 class="title">Half the <em>Truth</em></h1>
+      <p class="subtitle">Thea sees too much. Every aura, every lie, every thread of emotion bleeding through the people around her.</p>
+      <div class="cta-group">
+        <a href="https://www.royalroad.com/fiction/154210/half-the-truth" class="btn btn-primary" target="_blank" rel="noopener">Read on Royal Road</a>
+        <a href="#synopsis" class="btn btn-ghost">About the Story</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="scroll-hint">
+    <span>Scroll</span>
+    <div class="scroll-line"></div>
+  </div>
+</header>
+
+<!-- ========== SYNOPSIS ========== -->
+<section id="synopsis">
+  <div class="reveal">
+    <p class="section-label">The Story</p>
+    <h2 class="section-heading">Four kids. One impossible frequency.<br>A school full of lies.</h2>
+    <div class="synopsis-text">
+      <p>When Thea arrives at <span class="highlight">Millhaven Academy</span> — a boarding school for kids the system doesn't know what to do with — she expects the usual: broken people wearing bright masks.</p>
+      <p>She doesn't expect to find three others carrying the same impossible frequency in their soul.</p>
+      <p><span class="highlight">Cole</span> moves through shadows like they belong to him. <span class="highlight">Yuna</span> contains a strength that terrifies her. <span class="highlight">Kai</span> can swim through digital networks with his mind. None of them chose to be here. None of them know why they're connected.</p>
+      <div class="quote-block">
+        "The closer they get to answers, the more they realize that everyone around them — even the people trying to help — is only telling them half the truth."
+      </div>
+      <p>Millhaven is not what it appears to be. The staff are not all who they claim to be. And the four of them were not gathered in one place by accident. People are watching. A clock is ticking. And the truth about what they are is far more dangerous than anything they've survived alone.</p>
+    </div>
+  </div>
+</section>
+
+<div class="divider">
+  <div class="divider-line"></div>
+  <div class="divider-diamond"></div>
+  <div class="divider-line"></div>
+</div>
+
+<!-- ========== CHARACTERS ========== -->
+<section id="characters">
+  <div class="reveal">
+    <p class="section-label">The Four</p>
+    <h2 class="section-heading">They didn't choose this. But something chose them.</h2>
+    <div class="characters-grid">
+      <div class="character-card">
+        <h3 class="character-name">Thea</h3>
+        <p class="character-ability">Aura Sight</p>
+        <p class="character-desc">She sees every lie, every thread of emotion bleeding through the people around her. Seeing too much has always been her burden.</p>
+      </div>
+      <div class="character-card">
+        <h3 class="character-name">Cole</h3>
+        <p class="character-ability">Shadow Walker</p>
+        <p class="character-desc">He moves through shadows like they belong to him. The darkness isn't something he fears — it's something he wears.</p>
+      </div>
+      <div class="character-card">
+        <h3 class="character-name">Yuna</h3>
+        <p class="character-ability">Unbound Strength</p>
+        <p class="character-desc">She contains a strength that terrifies her. The power inside her isn't a gift — it's a pressure she's barely holding in.</p>
+      </div>
+      <div class="character-card">
+        <h3 class="character-name">Kai</h3>
+        <p class="character-ability">Digital Drift</p>
+        <p class="character-desc">He can swim through digital networks with his mind. Every system is an ocean, and he was born knowing how to breathe underwater.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider">
+  <div class="divider-line"></div>
+  <div class="divider-diamond"></div>
+  <div class="divider-line"></div>
+</div>
+
+<!-- ========== CHAPTERS ========== -->
+<section id="chapters">
+  <div class="reveal">
+    <p class="section-label">Table of Contents</p>
+    <h2 class="section-heading">Chapters</h2>
+    <div class="chapters-grid">
+      <a class="chapter-card" href="https://www.royalroad.com/fiction/154210/half-the-truth/chapter/3081687/the-noise" target="_blank" rel="noopener">
+        <span class="chapter-num">01</span>
+        <div class="chapter-info"><h3>The Noise</h3></div>
+        <span class="chapter-status">Read</span>
+      </a>
+      <a class="chapter-card" href="https://www.royalroad.com/fiction/154210/half-the-truth/chapter/3081706/open-books" target="_blank" rel="noopener">
+        <span class="chapter-num">02</span>
+        <div class="chapter-info"><h3>Open Books</h3></div>
+        <span class="chapter-status">Read</span>
+      </a>
+      <a class="chapter-card" href="https://www.royalroad.com/fiction/154210/half-the-truth/chapter/3081835/the-dark-corner" target="_blank" rel="noopener">
+        <span class="chapter-num">03</span>
+        <div class="chapter-info"><h3>The Dark Corner</h3></div>
+        <span class="chapter-status">Read</span>
+      </a>
+      <a class="chapter-card" href="https://www.royalroad.com/fiction/154210/half-the-truth/chapter/3089227/the-new-weight" target="_blank" rel="noopener">
+        <span class="chapter-num">04</span>
+        <div class="chapter-info"><h3>The New Weight</h3></div>
+        <span class="chapter-status">Read</span>
+      </a>
+      <a class="chapter-card" href="https://www.royalroad.com/fiction/154210/half-the-truth/chapter/3089260/the-triangle" target="_blank" rel="noopener">
+        <span class="chapter-num">05</span>
+        <div class="chapter-info"><h3>The Triangle</h3></div>
+        <span class="chapter-status">Read</span>
+      </a>
+      <a class="chapter-card" href="https://www.royalroad.com/fiction/154210/half-the-truth/chapter/3096126/the-fourth-thread" target="_blank" rel="noopener">
+        <span class="chapter-num">06</span>
+        <div class="chapter-info"><h3>The Fourth Thread</h3></div>
+        <span class="chapter-status">Read</span>
+      </a>
+      <a class="chapter-card" href="https://www.royalroad.com/fiction/154210/half-the-truth/chapter/3096135/chapter-seven-the-architecture-of-secrets" target="_blank" rel="noopener">
+        <span class="chapter-num">07</span>
+        <div class="chapter-info"><h3>The Architecture of Secrets</h3></div>
+        <span class="chapter-status">Read</span>
+      </a>
+      <a class="chapter-card" href="https://www.royalroad.com/fiction/154210/half-the-truth/chapter/3113495/chapter-eight-the-house-too-strong" target="_blank" rel="noopener">
+        <span class="chapter-num">08</span>
+        <div class="chapter-info"><h3>The House Too Strong</h3></div>
+        <span class="chapter-status">Read</span>
+      </a>
+      <a class="chapter-card" href="https://www.royalroad.com/fiction/154210/half-the-truth/chapter/3113500/chapter-nine-the-locked-door" target="_blank" rel="noopener">
+        <span class="chapter-num">09</span>
+        <div class="chapter-info"><h3>The Locked Door</h3></div>
+        <span class="chapter-status">Read</span>
+      </a>
+      <a class="chapter-card" href="https://www.royalroad.com/fiction/154210/half-the-truth/chapter/3120462/chapter-ten-the-journalist" target="_blank" rel="noopener">
+        <span class="chapter-num">10</span>
+        <div class="chapter-info"><h3>The Journalist</h3></div>
+        <span class="chapter-status">Read</span>
+      </a>
+      <a class="chapter-card" href="https://www.royalroad.com/fiction/154210/half-the-truth/chapter/3120467/chapter-eleven-the-man-behind-the-lock" target="_blank" rel="noopener">
+        <span class="chapter-num">11</span>
+        <div class="chapter-info"><h3>The Man Behind the Lock</h3></div>
+        <span class="chapter-status">Read</span>
+      </a>
+      <a class="chapter-card" href="https://www.royalroad.com/fiction/154210/half-the-truth/chapter/3138053/chapter-twelve-the-ears-in-the-walls" target="_blank" rel="noopener">
+        <span class="chapter-num">12</span>
+        <div class="chapter-info"><h3>The Ears in the Walls</h3></div>
+        <span class="chapter-status">Read</span>
+      </a>
+      <a class="chapter-card" href="https://www.royalroad.com/fiction/154210/half-the-truth/chapter/3138056/chapter-thirteen-the-warm-mask" target="_blank" rel="noopener">
+        <span class="chapter-num">13</span>
+        <div class="chapter-info"><h3>The Warm Mask</h3></div>
+        <span class="chapter-status">Read</span>
+      </a>
+      <a class="chapter-card" href="https://www.royalroad.com/fiction/154210/half-the-truth/chapter/3145078/chapter-fourteen-the-alliance" target="_blank" rel="noopener">
+        <span class="chapter-num">14</span>
+        <div class="chapter-info"><h3>The Alliance</h3></div>
+        <span class="chapter-status">Read</span>
+      </a>
+      <a class="chapter-card" href="https://www.royalroad.com/fiction/154210/half-the-truth/chapter/3158759/chapter-fifteen-the-shape-of-the-monster" target="_blank" rel="noopener">
+        <span class="chapter-num">15</span>
+        <div class="chapter-info"><h3>The Shape of the Monster</h3></div>
+        <span class="chapter-status">Read</span>
+      </a>
+      <a class="chapter-card" href="https://www.royalroad.com/fiction/154210/half-the-truth/chapter/3163375/chapter-sixteen-the-contact" target="_blank" rel="noopener">
+        <span class="chapter-num">16</span>
+        <div class="chapter-info"><h3>The Contact</h3></div>
+        <span class="chapter-status">Read</span>
+      </a>
+      <a class="chapter-card" href="https://www.royalroad.com/fiction/154210/half-the-truth/chapter/3163390/chapter-seventeen-the-deeper-map" target="_blank" rel="noopener">
+        <span class="chapter-num">17</span>
+        <div class="chapter-info"><h3>The Deeper Map</h3></div>
+        <span class="chapter-status">Read</span>
+      </a>
+      <a class="chapter-card" href="https://www.royalroad.com/fiction/154210/half-the-truth/chapter/3170646/chapter-eighteen-the-almost" target="_blank" rel="noopener">
+        <span class="chapter-num">18</span>
+        <div class="chapter-info"><h3>The Almost</h3></div>
+        <span class="chapter-status">Read</span>
+      </a>
+      <a class="chapter-card" href="https://www.royalroad.com/fiction/154210/half-the-truth/chapter/3170658/chapter-nineteen-friday" target="_blank" rel="noopener">
+        <span class="chapter-num">19</span>
+        <div class="chapter-info"><h3>Friday</h3></div>
+        <span class="chapter-status">Read</span>
+      </a>
+      <a class="chapter-card" href="https://www.royalroad.com/fiction/154210/half-the-truth/chapter/3189471/chapter-twenty-the-weight" target="_blank" rel="noopener">
+        <span class="chapter-num">20</span>
+        <div class="chapter-info"><h3>The Weight</h3></div>
+        <span class="chapter-status">Read</span>
+      </a>
+      <a class="chapter-card" href="https://www.royalroad.com/fiction/154210/half-the-truth/chapter/3189483/chapter-twenty-one-monday" target="_blank" rel="noopener">
+        <span class="chapter-num">21</span>
+        <div class="chapter-info"><h3>Monday</h3></div>
+        <span class="chapter-status">Read</span>
+      </a>
+      <a class="chapter-card" href="https://www.royalroad.com/fiction/154210/half-the-truth/chapter/3197285/chapter-twenty-two-the-underground" target="_blank" rel="noopener">
+        <span class="chapter-num">22</span>
+        <div class="chapter-info"><h3>The Underground</h3></div>
+        <span class="chapter-status">Read</span>
+      </a>
+      <a class="chapter-card" href="https://www.royalroad.com/fiction/154210/half-the-truth/chapter/3197313/chapter-twenty-three-the-search" target="_blank" rel="noopener">
+        <span class="chapter-num">23</span>
+        <div class="chapter-info"><h3>The Search</h3></div>
+        <span class="chapter-status">Read</span>
+      </a>
+      <a class="chapter-card" href="https://www.royalroad.com/fiction/154210/half-the-truth/chapter/3216956/chapter-twenty-four-my-four" target="_blank" rel="noopener">
+        <span class="chapter-num">24</span>
+        <div class="chapter-info"><h3>My Four</h3></div>
+        <span class="chapter-status">Read</span>
+      </a>
+      <a class="chapter-card" href="https://www.royalroad.com/fiction/154210/half-the-truth/chapter/3216962/chapter-twenty-five-the-farmhouse" target="_blank" rel="noopener">
+        <span class="chapter-num">25</span>
+        <div class="chapter-info"><h3>The Farmhouse</h3></div>
+        <span class="chapter-status">Read</span>
+      </a>
+      <a class="chapter-card" href="https://www.royalroad.com/fiction/154210/half-the-truth/chapter/3223981/chapter-twenty-six-the-closing" target="_blank" rel="noopener">
+        <span class="chapter-num">26</span>
+        <div class="chapter-info"><h3>The Closing</h3></div>
+        <span class="chapter-status">Read</span>
+      </a>
+      <a class="chapter-card" href="https://www.royalroad.com/fiction/154210/half-the-truth/chapter/3223996/chapter-twenty-seven-a-good-man" target="_blank" rel="noopener">
+        <span class="chapter-num">27</span>
+        <div class="chapter-info"><h3>A Good Man</h3></div>
+        <span class="chapter-status">Read</span>
+      </a>
+      <a class="chapter-card" href="https://www.royalroad.com/fiction/154210/half-the-truth/chapter/3249431/chapter-twenty-eight-kung-pao" target="_blank" rel="noopener">
+        <span class="chapter-num">28</span>
+        <div class="chapter-info"><h3>Kung Pao</h3></div>
+        <span class="chapter-status">Read</span>
+      </a>
+      <a class="chapter-card" href="https://www.royalroad.com/fiction/154210/half-the-truth/chapter/3314883/chapter-twenty-nine-the-watchers" target="_blank" rel="noopener">
+        <span class="chapter-num">29</span>
+        <div class="chapter-info"><h3>The Watchers</h3></div>
+        <span class="chapter-status">Read</span>
+      </a>
+      <a class="chapter-card" href="https://www.royalroad.com/fiction/154210/half-the-truth/chapter/3330498/chapter-thirty-the-receipt" target="_blank" rel="noopener">
+        <span class="chapter-num">30</span>
+        <div class="chapter-info"><h3>The Receipt</h3></div>
+        <span class="chapter-status">Read</span>
+      </a>
+      <a class="chapter-card" href="https://www.royalroad.com/fiction/154210/half-the-truth/chapter/3359622/he-will-not-be-the-last-one" target="_blank" rel="noopener">
+        <span class="chapter-num">31</span>
+        <div class="chapter-info"><h3>He Will Not Be the Last One</h3></div>
+        <span class="chapter-status">Read</span>
+      </a>
+    </div>
+    <div class="chapters-more">
+      <a href="https://www.royalroad.com/fiction/154210/half-the-truth" class="btn btn-ghost" target="_blank" rel="noopener">View All Chapters on Royal Road</a>
+    </div>
+  </div>
+</section>
+
+<div class="divider">
+  <div class="divider-line"></div>
+  <div class="divider-diamond"></div>
+  <div class="divider-line"></div>
+</div>
+
+<!-- ========== AUTHOR ========== -->
+<section id="author">
+  <div class="reveal">
+    <p class="section-label">The Author</p>
+    <h2 class="section-heading">About the Writer</h2>
+    <div class="author-section">
+      <div class="author-avatar">FR</div>
+      <div class="author-bio">
+        <p><strong>Half the Truth</strong> is brought to you by <span class="highlight">The Fractured Realm</span> — a creative studio driven by a love of storytelling and a refusal to do things the easy way.</p>
+        <br>
+        <p>New chapters release regularly on Royal Road. If you enjoy the story, leave a rating, share it with a friend, or join the community on Patreon for early access and behind-the-scenes content.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider">
+  <div class="divider-line"></div>
+  <div class="divider-diamond"></div>
+  <div class="divider-line"></div>
+</div>
+
+<!-- ========== FOLLOW / PLATFORMS ========== -->
+<section id="follow" class="subscribe-section">
+  <div class="reveal" style="position:relative; z-index:1;">
+    <p class="section-label">Follow the Story</p>
+    <h2 class="section-heading">Stay Connected</h2>
+    <p style="font-family: 'Libre Baskerville', serif; font-size: 0.95rem; color: var(--mist); opacity: 0.7; max-width: 500px; margin: 0 auto 2rem; line-height: 1.8;">Follow along as the story unfolds. New chapters, behind-the-scenes content, and more.</p>
+    <div class="platforms">
+      <a href="https://www.royalroad.com/fiction/154210/half-the-truth" class="platform-link" target="_blank" rel="noopener">
+        <span class="platform-icon">📖</span> Royal Road
+      </a>
+      <a href="https://www.patreon.com/cw/TheFracturedRealm" class="platform-link" target="_blank" rel="noopener">
+        <span class="platform-icon">🎭</span> Patreon
+      </a>
+      <a href="https://www.youtube.com/@TheFracturedRealm" class="platform-link" target="_blank" rel="noopener">
+        <span class="platform-icon">▶️</span> YouTube
+      </a>
+      <a href="https://www.tiktok.com/@thefracturedrealm.net" class="platform-link" target="_blank" rel="noopener">
+        <span class="platform-icon">🎵</span> TikTok
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ========== FOOTER ========== -->
+<footer>
+  <div class="divider" style="margin-bottom:2rem;">
+    <div class="divider-line"></div>
+    <div class="divider-diamond"></div>
+    <div class="divider-line"></div>
+  </div>
+  <p>© 2026 Half the Truth. All rights reserved.</p>
+</footer>
+
+<script>
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.15 });
+  reveals.forEach(el => observer.observe(el));
+
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+      e.preventDefault();
+      const target = document.querySelector(this.getAttribute('href'));
+      if (target) target.scrollIntoView({ behavior: 'smooth' });
+    });
+  });
+</script>
+</body>
+</html>
