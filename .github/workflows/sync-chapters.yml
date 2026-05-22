@@ -1,0 +1,50 @@
+name: Sync chapters from Royal Road
+
+# Runs every 15 minutes during the Tue/Thu publish window (2 PM PT canonical
+# release; UTC offset varies seasonally so the window catches both PDT/PST).
+# Also exposes a manual trigger button on the Actions tab in case you want to
+# push a chapter sync between scheduled windows.
+
+on:
+  schedule:
+    # Tue + Thu, every 15 min from 20:00 UTC (1 PM PDT) through 23:45 UTC (4:45 PM PDT)
+    - cron: '*/15 20-23 * * 2,4'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: sync-chapters
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          # Need full history so the push isn't a shallow rejection.
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Run chapter sync
+        run: |
+          python scripts/sync_chapters.py
+
+      - name: Commit and push if changed
+        run: |
+          if [ -z "$(git status --porcelain)" ]; then
+            echo "No changes — nothing to commit."
+            exit 0
+          fi
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -A
+          git commit -m "chore: auto-sync Royal Road chapters ($(date -u +'%Y-%m-%d %H:%M UTC'))"
+          git push

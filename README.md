@@ -43,10 +43,13 @@ git push
 
 ## Cadence
 
-New chapters publish on Royal Road every Tuesday and Thursday at 2:15 PM. After each release:
-1. Add the new chapter card to `index.html` (copy the previous block, bump number, paste new RR URL + title).
-2. Update `sitemap.xml` `<lastmod>`.
-3. Commit + push.
+New chapters publish on Royal Road every Tuesday and Thursday at 2:14 PM PT. The website auto-syncs from Royal Road via the `sync-chapters` GitHub Action — no manual edit needed when a chapter goes live.
+
+If you want to push a manual update outside the schedule, you can:
+1. Add the new chapter card to `index.html` by hand (copy a previous block, bump number, paste new RR URL + title), and/or
+2. Trigger the workflow yourself: GitHub repo → **Actions** tab → **Sync chapters from Royal Road** → **Run workflow**.
+
+The auto-sync is harmless to run anytime — if all chapters are already present, it makes no commits.
 
 ## Links
 
