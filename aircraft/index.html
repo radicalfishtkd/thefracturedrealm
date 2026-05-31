@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>aircraftBroker · dormant aircraft leads</title>
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body data-passhash="b97a8f488b4cdcfc91296d9a53d31e829cda35d22d4d1dd3858c4638fb00d011">
+<header>
+  <h1><a href="./">aircraftBroker</a></h1>
+  <span class="subtitle">dormant aircraft finder · generated 2026-05-31 03:16 UTC</span>
+</header>
+<main>
+
+<div id="gate" class="gate" hidden>
+  <form id="gate-form" class="gate-form">
+    <label>Passphrase
+      <input type="password" id="gate-input" autocomplete="off" autofocus>
+    </label>
+    <button type="submit">Enter</button>
+    <p id="gate-error" class="gate-error" hidden>Incorrect passphrase.</p>
+  </form>
+</div>
+
+<div id="app" hidden>
+  <section class="summary">
+    <span class="bucket bucket-hot">hot 19</span> <span class="bucket bucket-warm">warm 507</span> <span class="bucket bucket-cool">cool 6444</span>
+    <span class="total"><span id="match-count">6970</span> matching</span>
+  </section>
+
+  <form class="filters" id="filters" onsubmit="return false;">
+    <label>State
+      <select name="state" id="f-state"><option value="">any</option></select>
+    </label>
+    <label>Bucket
+      <select name="bucket" id="f-bucket">
+        <option value="">any</option>
+        <option value="hot">hot</option>
+        <option value="warm">warm</option>
+        <option value="cool">cool</option>
+      </select>
+    </label>
+    <label>Min score
+      <input type="number" id="f-min-score" min="0" max="100" placeholder="0">
+    </label>
+    <label>Make contains
+      <input type="text" id="f-mfr" placeholder="e.g. CESSNA">
+    </label>
+    <label>Owner contains
+      <input type="text" id="f-owner" placeholder="e.g. SMITH">
+    </label>
+    <label>Salvage
+      <select id="f-salvage">
+        <option value="">all</option>
+        <option value="exclude">exclude (flyable only)</option>
+        <option value="only">only (parts/salvage)</option>
+      </select>
+    </label>
+    <label class="checkbox-label">
+      <input type="checkbox" id="f-obit"> Obituary match only
+    </label>
+    <button type="button" id="f-reset" class="reset">reset</button>
+  </form>
+
+  <table class="leads">
+    <thead>
+      <tr>
+        <th data-sort="score">Score</th>
+        <th data-sort="n_number">N#</th>
+        <th data-sort="year_mfr">Year</th>
+        <th data-sort="mfr">Make</th>
+        <th data-sort="model">Model</th>
+        <th data-sort="owner_name">Owner</th>
+        <th data-sort="city">City</th>
+        <th data-sort="state">State</th>
+        <th>Type</th>
+        <th>Reasons</th>
+      </tr>
+    </thead>
+    <tbody id="rows"></tbody>
+  </table>
+
+  <nav class="pager">
+    <button id="pg-prev">← prev</button>
+    <span id="pg-info"></span>
+    <button id="pg-next">next →</button>
+  </nav>
+</div>
+
+</main>
+<script src="assets/auth.js"></script>
+<script src="assets/app.js"></script>
+</body>
+</html>
