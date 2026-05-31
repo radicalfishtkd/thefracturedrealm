@@ -72,11 +72,17 @@ exports.handler = async (event) => {
     });
     if (!tgResp.ok) {
       const body = (await tgResp.text()).slice(0, 400);
+      const chatIdHex = Array.from(chatId)
+        .map(c => c.charCodeAt(0).toString(16).padStart(2, "0"))
+        .join(" ");
       return {
         statusCode: 502,
         body: `telegram error: status=${tgResp.status} ` +
               `tokenLen=${tokenLen} tokenHead=${tokenHead} ` +
-              `chatIdLen=${chatId.length} body=${body}`,
+              `chatIdLen=${chatId.length} ` +
+              `chatIdRaw="${chatId}" ` +
+              `chatIdHex="${chatIdHex}" ` +
+              `body=${body}`,
       };
     }
   } catch (e) {
