@@ -53,11 +53,6 @@ exports.handler = async (event) => {
     `<b>UA:</b> <code>${escapeHtml(ua)}</code>`,
   ].join("\n");
 
-  // Diagnostic: surface Telegram error details to help debug env-var issues.
-  // Token length is logged so you can see if the env var was truncated or
-  // padded without exposing the secret itself.
-  const tokenLen = token.length;
-  const tokenHead = token.slice(0, 4);
   try {
     const tgResp = await fetch(`${TELEGRAM_API}${token}/sendMessage`, {
       method: "POST",
@@ -71,26 +66,10 @@ exports.handler = async (event) => {
       signal: AbortSignal.timeout(5000),
     });
     if (!tgResp.ok) {
-      const body = (await tgResp.text()).slice(0, 400);
-      const chatIdHex = Array.from(chatId)
-        .map(c => c.charCodeAt(0).toString(16).padStart(2, "0"))
-        .join(" ");
-      return {
-        statusCode: 502,
-        body: `telegram error: status=${tgResp.status} ` +
-              `tokenLen=${tokenLen} tokenHead=${tokenHead} ` +
-              `chatIdLen=${chatId.length} ` +
-              `chatIdRaw="${chatId}" ` +
-              `chatIdHex="${chatIdHex}" ` +
-              `body=${body}`,
-      };
+      return { statusCode: 502, body: "telegram error" };
     }
-  } catch (e) {
-    return {
-      statusCode: 502,
-      body: `telegram fetch failed: ${e?.message || String(e)} ` +
-            `tokenLen=${tokenLen} tokenHead=${tokenHead}`,
-    };
+  } catch (_) {
+    return { statusCode: 502, body: "telegram fetch failed" };
   }
 
   return {
