@@ -10,7 +10,7 @@
 <body data-passhash="b97a8f488b4cdcfc91296d9a53d31e829cda35d22d4d1dd3858c4638fb00d011">
 <header>
   <h1><a href="./">aircraftBroker</a></h1>
-  <span class="subtitle">dormant aircraft finder · generated 2026-05-31 03:45 UTC</span>
+  <span class="subtitle">dormant aircraft finder · generated 2026-05-31 04:04 UTC</span>
 </header>
 <main>
 
@@ -90,7 +90,9 @@
 </div>
 
 </main>
-<script src="assets/auth.js"></script>
+<!-- app.js must load first so window.afterUnlock is defined before auth.js
+     fires reveal() on a returning-session cache hit -->
 <script src="assets/app.js"></script>
+<script src="assets/auth.js"></script>
 </body>
 </html>
